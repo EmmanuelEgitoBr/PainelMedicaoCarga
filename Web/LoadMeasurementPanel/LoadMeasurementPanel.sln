@@ -1,0 +1,49 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.11.35312.102
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoadMeasurementPanel.Web", "LoadMeasurementPanel.Web\LoadMeasurementPanel.Web.csproj", "{20AC81FC-054C-4FF7-9486-46CEEB77172A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoadMeasurementPanel.Domain", "LoadMeasurementPanel.Domain\LoadMeasurementPanel.Domain.csproj", "{54C6B0B5-4A85-4553-8423-5D0AE09A68F7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoadMeasurementPanel.Infrastructure", "LoadMeasurementPanel.Infrastructure\LoadMeasurementPanel.Infrastructure.csproj", "{8952EA4B-1D1E-4D44-AA48-2A2D2A1AF258}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoadMeasurementPanel.Application", "LoadMeasurementPanel.Application\LoadMeasurementPanel.Application.csproj", "{40667A80-2638-4EFD-B50D-1F7C04266B28}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoadMeasurementPanel.CrossCutting", "LoadMeasurementPanel.CrossCutting\LoadMeasurementPanel.CrossCutting.csproj", "{FFD30B5C-0F68-423B-8AAF-5964D943456D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{20AC81FC-054C-4FF7-9486-46CEEB77172A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{20AC81FC-054C-4FF7-9486-46CEEB77172A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{20AC81FC-054C-4FF7-9486-46CEEB77172A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{20AC81FC-054C-4FF7-9486-46CEEB77172A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{54C6B0B5-4A85-4553-8423-5D0AE09A68F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{54C6B0B5-4A85-4553-8423-5D0AE09A68F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{54C6B0B5-4A85-4553-8423-5D0AE09A68F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{54C6B0B5-4A85-4553-8423-5D0AE09A68F7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8952EA4B-1D1E-4D44-AA48-2A2D2A1AF258}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8952EA4B-1D1E-4D44-AA48-2A2D2A1AF258}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8952EA4B-1D1E-4D44-AA48-2A2D2A1AF258}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8952EA4B-1D1E-4D44-AA48-2A2D2A1AF258}.Release|Any CPU.Build.0 = Release|Any CPU
+		{40667A80-2638-4EFD-B50D-1F7C04266B28}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{40667A80-2638-4EFD-B50D-1F7C04266B28}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{40667A80-2638-4EFD-B50D-1F7C04266B28}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{40667A80-2638-4EFD-B50D-1F7C04266B28}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FFD30B5C-0F68-423B-8AAF-5964D943456D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FFD30B5C-0F68-423B-8AAF-5964D943456D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FFD30B5C-0F68-423B-8AAF-5964D943456D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FFD30B5C-0F68-423B-8AAF-5964D943456D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B4321CE5-0640-47C1-BFF3-B280A71BDFB4}
+	EndGlobalSection
+EndGlobal
