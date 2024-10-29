@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35312.102
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoadMeasurementPanel.Worker", "LoadMeasurementPanel.Worker.csproj", "{0CC0CAD2-B079-47D7-87FA-A2099FEAC9DB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoadMeasurementPanel.Worker", "LoadMeasurementPanel.Worker\LoadMeasurementPanel.Worker.csproj", "{F5163539-C8DB-42B5-9E1F-5D8A16E517F6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{0CC0CAD2-B079-47D7-87FA-A2099FEAC9DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0CC0CAD2-B079-47D7-87FA-A2099FEAC9DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0CC0CAD2-B079-47D7-87FA-A2099FEAC9DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0CC0CAD2-B079-47D7-87FA-A2099FEAC9DB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F5163539-C8DB-42B5-9E1F-5D8A16E517F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F5163539-C8DB-42B5-9E1F-5D8A16E517F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F5163539-C8DB-42B5-9E1F-5D8A16E517F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F5163539-C8DB-42B5-9E1F-5D8A16E517F6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {F7B9159F-E962-430C-89E0-30F75CFDDEEE}
+		SolutionGuid = {04CF3E59-D9E9-4395-836A-900AC0DFC3D7}
 	EndGlobalSection
 EndGlobal

@@ -4,7 +4,7 @@
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <UserSecretsId>dotnet-LoadMeasurementPanel.Worker-d0a01a2f-a3a5-4abc-a2d6-f1fd3e3ce0f4</UserSecretsId>
+    <UserSecretsId>dotnet-LoadMeasurementPanel.Worker-1505bd7d-a762-4fd8-8354-f5004f087628</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
