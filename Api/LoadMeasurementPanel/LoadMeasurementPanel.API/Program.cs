@@ -11,6 +11,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddAppInfrastructure();
 builder.Services.AddSwaggerInfrastructure();
 builder.Services.AddMongoInfrastructure(builder.Configuration);
+builder.Services.AddSqlServerInfrastructure(builder.Configuration);
 
 var app = builder.Build();
 

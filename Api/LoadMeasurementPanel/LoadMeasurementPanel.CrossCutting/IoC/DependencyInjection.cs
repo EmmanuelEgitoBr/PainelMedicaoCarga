@@ -3,7 +3,9 @@ using LoadMeasurementPanel.Application.Mappings;
 using LoadMeasurementPanel.Application.Services;
 using LoadMeasurementPanel.Domain.Interfaces.MongoInterfaces;
 using LoadMeasurementPanel.Infra.Configurations;
+using LoadMeasurementPanel.Infra.Context;
 using LoadMeasurementPanel.Infra.Repositories.MongoDbRepositories;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
@@ -62,6 +64,16 @@ namespace LoadMeasurementPanel.CrossCutting.IoC
 
             services.AddScoped(provider => new MongoClient(mongoDBSettings.ConnectionString)
                                 .GetDatabase(mongoDBSettings.DatabaseName));
+
+            return services;
+        }
+
+        public static IServiceCollection AddSqlServerInfrastructure(this IServiceCollection services,
+                                                                IConfiguration configuration)
+        {
+            services.AddDbContext<ApplicationDbContext>(options =>
+                options.UseSqlServer(configuration.GetConnectionString("SqlConnection"),
+                b => b.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName)));
 
             return services;
         }
