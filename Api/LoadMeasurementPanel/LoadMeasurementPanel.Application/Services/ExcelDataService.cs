@@ -17,11 +17,13 @@ namespace LoadMeasurementPanel.Application.Services
             _mapper = mapper;
         }
 
-        public async Task RecordExcelData(RegisterExcelDataDto excelData)
+        public async Task RecordExcelData(IEnumerable<ExcelDataDto> excelDataDto)
         {
-            excelData.DataRegistro = DateTime.Now;
+            var register = new RegisterExcelDataDto();
+            register.DataRegistro = DateTime.Now;
+            register.Medicoes = excelDataDto;
 
-            var excelDataEntity = _mapper.Map<RegisterExcelData>(excelData);
+            var excelDataEntity = _mapper.Map<RegisterExcelData>(register);
 
             await _excelDataRepository.CreateAsync(excelDataEntity);
         }

@@ -19,7 +19,7 @@ namespace LoadMeasurementPanel.Worker.Services
             _apiService = apiService;
         }
 
-        public async Task<IEnumerable<DailyEnergy>> ImportExcelFromFtpServer(FtpSettings settings)
+        public async Task ImportExcelFromFtpServer(FtpSettings settings)
         {
             using var ftpClient = new FtpClient(settings.Host, settings.Username, settings.Password);
             // Configurar o uso de TLS/SSL
@@ -52,8 +52,7 @@ namespace LoadMeasurementPanel.Worker.Services
 
                     if(result.Result!.Count() >= 0)
                     {
-                        var oi = "";
-                        var apiResult = _apiService.RecordExcelData(result.Result);
+                        var apiResult = await _apiService.RecordExcelData(result.Result);
                     }
 
                     File.Delete(localFilePath);  // Deleta o arquivo local após o processamento
@@ -65,10 +64,11 @@ namespace LoadMeasurementPanel.Worker.Services
 
                 ftpClient.Disconnect();
             }
-            catch (Exception ex) { return null; }
-
-
-            throw new NotImplementedException();
+            catch (Exception ex) 
+            {
+                _logger.LogError($"Erro ao se conectar com o serviço: {ex.Message}"); 
+            }
+            _logger.LogInformation("Fim de processamento");
         }
 
         private Response ProcessExcelFile(string filePath, string fileName)

@@ -1,6 +1,6 @@
-﻿using LoadMeasurementPanel.Application.ExcelFile.Commands;
+﻿using LoadMeasurementPanel.Application.Dtos;
+using LoadMeasurementPanel.Application.Interfaces;
 using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LoadMeasurementPanel.API.Controllers
@@ -9,15 +9,20 @@ namespace LoadMeasurementPanel.API.Controllers
     [ApiController]
     public class ExcelFileController : ControllerBase
     {
-        private ISender? _mediator;
+        private IExcelDataService _excelService;
 
-        protected ISender Mediator => _mediator ??= HttpContext.RequestServices.GetService<ISender>()!;
+        public ExcelFileController(IExcelDataService excelService)
+        {
+            _excelService = excelService;
+        }
 
         [HttpPost("gravar-dados")]
         [ProducesResponseType(StatusCodes.Status201Created)]
-        public async Task<string> RecordExcelData(RecordExcelDataCommand command)
+        public async Task<string> RecordExcelData(IEnumerable<ExcelDataDto> dados)
         {
-            return await Mediator.Send(command);
+            await _excelService.RecordExcelData(dados);
+
+            return $"Foram inseridos com sucesso {dados.Count()} registros"; 
         }
     }
 }

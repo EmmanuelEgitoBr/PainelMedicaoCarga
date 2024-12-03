@@ -42,7 +42,7 @@ namespace LoadMeasurementPanel.Worker
                     await Task.Delay(TimeSpan.FromHours(24), stoppingToken);
                 }
                 */
-                var result = await _ftpService.ImportExcelFromFtpServer(ftpSettings);
+                await _ftpService.ImportExcelFromFtpServer(ftpSettings);
                 await Task.Delay(TimeSpan.FromSeconds(5), stoppingToken);
 
                 if (_logger.IsEnabled(LogLevel.Information))

@@ -9,6 +9,7 @@ namespace LoadMeasurementPanel.Application.Mappings
         public DomainToDTOMappingProfile()
         {
             CreateMap<ExcelData, ExcelDataDto>().ReverseMap();
+            CreateMap<RegisterExcelData, RegisterExcelDataDto>().ReverseMap();
         }
     }
 }

@@ -4,6 +4,6 @@ namespace LoadMeasurementPanel.Application.Interfaces
 {
     public interface IExcelDataService
     {
-        Task RecordExcelData(RegisterExcelDataDto excelData);
+        Task RecordExcelData(IEnumerable<ExcelDataDto> excelData);
     }
 }

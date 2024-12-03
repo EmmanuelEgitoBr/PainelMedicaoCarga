@@ -18,12 +18,20 @@ namespace LoadMeasurementPanel.Worker.Services
 
         public async Task<string> RecordExcelData(IEnumerable<DailyEnergy> measures)
         {
-            var json = JsonSerializer.Serialize(measures);
-            var content = new StringContent(json, Encoding.UTF8, "application/json");
-            var response = await _httpClient.PostAsync($"/api/ExcelFile/gravar-dados", content);
-            response.EnsureSuccessStatusCode();
+            try
+            {
+                var json = JsonSerializer.Serialize(measures);
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
+                var response = await _httpClient.PostAsync($"/api/ExcelFile/gravar-dados", content);
+                response.EnsureSuccessStatusCode();
 
-            return await response.Content.ReadFromJsonAsync<string>() ?? "";
+                return await response.Content.ReadFromJsonAsync<string>() ?? "";
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            
         }
     }
 }

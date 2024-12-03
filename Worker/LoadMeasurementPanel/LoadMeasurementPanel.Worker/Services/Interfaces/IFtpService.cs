@@ -5,6 +5,6 @@ namespace LoadMeasurementPanel.Worker.Services.Interfaces
 {
     public interface IFtpService
     {
-        Task<IEnumerable<DailyEnergy>> ImportExcelFromFtpServer(FtpSettings settings);
+        Task ImportExcelFromFtpServer(FtpSettings settings);
     }
 }
