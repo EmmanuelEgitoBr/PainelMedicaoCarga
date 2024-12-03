@@ -1,6 +1,5 @@
 ﻿using LoadMeasurementPanel.Application.Dtos;
 using LoadMeasurementPanel.Application.Interfaces;
-using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LoadMeasurementPanel.API.Controllers
@@ -18,7 +17,7 @@ namespace LoadMeasurementPanel.API.Controllers
 
         [HttpPost("gravar-dados")]
         [ProducesResponseType(StatusCodes.Status201Created)]
-        public async Task<string> RecordExcelData(IEnumerable<ExcelDataDto> dados)
+        public async Task<string> RecordExcelDataInMongoDb(IEnumerable<ExcelDataDto> dados)
         {
             await _excelService.RecordExcelData(dados);
 

@@ -37,7 +37,7 @@ namespace LoadMeasurementPanel.Worker
                 /*
                 if (now.Hour == hour && now.Minute == minute)
                 {
-                    var result = await _ftpService.ImportExcelFromFtpServer(ftpSettings);
+                    await _ftpService.ImportExcelFromFtpServer(ftpSettings);
 
                     await Task.Delay(TimeSpan.FromHours(24), stoppingToken);
                 }

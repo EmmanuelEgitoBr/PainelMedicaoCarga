@@ -1,9 +1,8 @@
-﻿using LoadMeasurementPanel.Worker.Services.Interfaces;
-using System.Net.Http;
+﻿using LoadMeasurementPanel.Worker.Models.MeasureModels;
+using LoadMeasurementPanel.Worker.Services.Interfaces;
 using System.Net.Http.Json;
-using System.Text.Json;
 using System.Text;
-using LoadMeasurementPanel.Worker.Models.MeasureModels;
+using System.Text.Json;
 
 namespace LoadMeasurementPanel.Worker.Services
 {
