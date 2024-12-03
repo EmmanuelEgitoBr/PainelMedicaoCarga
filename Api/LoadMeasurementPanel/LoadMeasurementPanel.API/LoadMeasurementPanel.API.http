@@ -1,0 +1,6 @@
+@LoadMeasurementPanel.API_HostAddress = http://localhost:5136
+
+GET {{LoadMeasurementPanel.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
