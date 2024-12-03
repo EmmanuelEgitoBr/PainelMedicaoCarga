@@ -10,6 +10,8 @@ namespace LoadMeasurementPanel.Application.Mappings
         {
             CreateMap<ExcelData, ExcelDataDto>().ReverseMap();
             CreateMap<RegisterExcelData, RegisterExcelDataDto>().ReverseMap();
+            CreateMap<EnergyConsumptionPerDay, EnergyConsumptionPerDayDto>().ReverseMap();
+            CreateMap<MeasuringPoint, MeasuringPointDto>().ReverseMap();
         }
     }
 }

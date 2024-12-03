@@ -2,9 +2,11 @@
 using LoadMeasurementPanel.Application.Mappings;
 using LoadMeasurementPanel.Application.Services;
 using LoadMeasurementPanel.Domain.Interfaces.MongoInterfaces;
+using LoadMeasurementPanel.Domain.Interfaces.SqlInterfaces;
 using LoadMeasurementPanel.Infra.Configurations;
 using LoadMeasurementPanel.Infra.Context;
 using LoadMeasurementPanel.Infra.Repositories.MongoDbRepositories;
+using LoadMeasurementPanel.Infra.Repositories.SqlServerRepositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -19,6 +21,7 @@ namespace LoadMeasurementPanel.CrossCutting.IoC
         {
             services.AddScoped<IExcelDataRepository, ExcelDataRepository>();
             services.AddScoped<IExcelDataService, ExcelDataService>();
+            services.AddScoped<IPanelService, PanelService>();
 
             services.AddAutoMapper(typeof(DomainToDTOMappingProfile));
             return services;
@@ -74,6 +77,9 @@ namespace LoadMeasurementPanel.CrossCutting.IoC
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(configuration.GetConnectionString("SqlConnection"),
                 b => b.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName)));
+
+            services.AddScoped<IConsumptionPerDayRepository, ConsumptionPerDayRepository>();
+            services.AddScoped<IMeasuringPointRepository, MeasuringPointRepository>();
 
             return services;
         }
