@@ -6,4 +6,14 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="13.0.1" />
+    <PackageReference Include="MediatR" Version="12.4.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\LoadMeasurementPanel.Domain\LoadMeasurementPanel.Domain.csproj" />
+    <ProjectReference Include="..\LoadMeasurementPanel.Infra\LoadMeasurementPanel.Infra.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -1,7 +1,5 @@
-using LoadMeasurementPanel.Worker.Models;
-using LoadMeasurementPanel.Worker.Models.FtpModels;
+using LoadMeasurementPanel.Worker.Configuration;
 using LoadMeasurementPanel.Worker.Services.Interfaces;
-using System.Xml.Serialization;
 
 namespace LoadMeasurementPanel.Worker
 {

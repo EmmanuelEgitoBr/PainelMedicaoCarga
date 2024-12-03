@@ -1,7 +1,7 @@
 ﻿using ClosedXML.Excel;
 using FluentFTP;
+using LoadMeasurementPanel.Worker.Configuration;
 using LoadMeasurementPanel.Worker.Models;
-using LoadMeasurementPanel.Worker.Models.FtpModels;
 using LoadMeasurementPanel.Worker.Models.MeasureModels;
 using LoadMeasurementPanel.Worker.Services.Interfaces;
 using LoadMeasurementPanel.Worker.Utils;
@@ -11,10 +11,12 @@ namespace LoadMeasurementPanel.Worker.Services
     public class FtpService : IFtpService
     {
         private ILogger<FtpService> _logger;
+        private IApiService _apiService;
 
-        public FtpService(ILogger<FtpService> logger)
+        public FtpService(ILogger<FtpService> logger, IApiService apiService)
         {
             _logger = logger;
+            _apiService = apiService;
         }
 
         public async Task<IEnumerable<DailyEnergy>> ImportExcelFromFtpServer(FtpSettings settings)
@@ -51,6 +53,7 @@ namespace LoadMeasurementPanel.Worker.Services
                     if(result.Result!.Count() >= 0)
                     {
                         var oi = "";
+                        var apiResult = _apiService.RecordExcelData(result.Result);
                     }
 
                     File.Delete(localFilePath);  // Deleta o arquivo local após o processamento

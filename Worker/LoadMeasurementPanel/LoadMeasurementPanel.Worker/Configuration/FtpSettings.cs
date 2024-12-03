@@ -1,4 +1,4 @@
-﻿namespace LoadMeasurementPanel.Worker.Models.FtpModels
+﻿namespace LoadMeasurementPanel.Worker.Configuration
 {
     public class FtpSettings
     {

@@ -1,4 +1,4 @@
-﻿using LoadMeasurementPanel.Worker.Models.FtpModels;
+﻿using LoadMeasurementPanel.Worker.Configuration;
 using LoadMeasurementPanel.Worker.Models.MeasureModels;
 
 namespace LoadMeasurementPanel.Worker.Services.Interfaces
