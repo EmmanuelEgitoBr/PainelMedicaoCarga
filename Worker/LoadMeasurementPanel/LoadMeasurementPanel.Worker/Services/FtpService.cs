@@ -88,16 +88,19 @@ namespace LoadMeasurementPanel.Worker.Services
                     var pointName = row.Cell(1).GetValue<string>();
                     _logger.LogInformation($"Valor da célula: {pointName}");
 
-                    measurementPerDay.MeasurementPointName = pointName;
-
-                    for (int i = 2; i < 26; i++)
+                    if(pointName != "Ponto de Medição")
                     {
-                        measurementPerDay.Measurements.Add(row.Cell(i).GetValue<decimal>());
+                        measurementPerDay.MeasurementPointName = pointName;
+
+                        for (int i = 2; i < 26; i++)
+                        {
+                            measurementPerDay.Measurements.Add(row.Cell(i).GetValue<decimal>());
+                        }
+
+                        measurementPerDay.MeasurementDate = measurementDate;
+
+                        measuresList.Add(measurementPerDay);
                     }
-
-                    measurementPerDay.MeasurementDate = measurementDate;
-
-                    measuresList.Add(measurementPerDay);
                 }
                 
                 _logger.LogInformation("Processamento do arquivo Excel concluído.");
