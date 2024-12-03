@@ -11,7 +11,7 @@ namespace LoadMeasurementPanel.Infra.Context
         }
 
         public DbSet<MeasuringPoint> MeasuringPoints { get; set; }
-        public DbSet<EnergyConsumptionPerDay> ConsumptionPerDays { get; set; }
+        public DbSet<EnergyConsumptionPerDay> EnergyConsumptionsPerDay { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

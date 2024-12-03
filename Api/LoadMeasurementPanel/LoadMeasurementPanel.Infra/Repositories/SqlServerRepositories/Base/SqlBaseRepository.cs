@@ -17,12 +17,14 @@ namespace LoadMeasurementPanel.Infra.Repositories.SqlServerRepositories.Base
         public async Task<T> CreateAsync(T commandCreate)
         {
             await _applicationDbContext.Set<T>().AddAsync(commandCreate);
+            _applicationDbContext.SaveChanges();
             return commandCreate;
         }
 
         public Task Delete(long Id)
         {
             _applicationDbContext.Remove(Id);
+            _applicationDbContext.SaveChanges();
             return Task.CompletedTask;
         }
 
@@ -39,6 +41,7 @@ namespace LoadMeasurementPanel.Infra.Repositories.SqlServerRepositories.Base
         public T Update(T commandUpdate)
         {
             _applicationDbContext.Set<T>().Update(commandUpdate);
+            _applicationDbContext.SaveChanges();
             return commandUpdate;
         }
     }
