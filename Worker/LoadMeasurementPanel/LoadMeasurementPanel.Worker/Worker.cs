@@ -27,7 +27,7 @@ namespace LoadMeasurementPanel.Worker
                 Host = _configuration.GetValue<string>("FtpSettings:Host")!,
                 Username = _configuration.GetValue<string>("FtpSettings:Username")!,
                 Password = _configuration.GetValue<string>("FtpSettings:Password")!,
-                RemoteFilePath = _configuration.GetValue<string>("FtpSettings:RemoteFilePath")!
+                RemoteFileDirectory = _configuration.GetValue<string>("FtpSettings:RemoteFileDirectory")!
             };
             
             var hour = _configuration.GetValue<int>("Schedule:Hour");
@@ -36,13 +36,16 @@ namespace LoadMeasurementPanel.Worker
             while (!stoppingToken.IsCancellationRequested)
             {
                 var now = DateTime.Now;
-
+                /*
                 if (now.Hour == hour && now.Minute == minute)
                 {
                     var result = await _ftpService.ImportExcelFromFtpServer(ftpSettings);
 
                     await Task.Delay(TimeSpan.FromHours(24), stoppingToken);
                 }
+                */
+                var result = await _ftpService.ImportExcelFromFtpServer(ftpSettings);
+                await Task.Delay(TimeSpan.FromSeconds(5), stoppingToken);
 
                 if (_logger.IsEnabled(LogLevel.Information))
                 {

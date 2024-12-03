@@ -4,6 +4,7 @@ using LoadMeasurementPanel.Worker.Models;
 using LoadMeasurementPanel.Worker.Models.FtpModels;
 using LoadMeasurementPanel.Worker.Models.MeasureModels;
 using LoadMeasurementPanel.Worker.Services.Interfaces;
+using LoadMeasurementPanel.Worker.Utils;
 
 namespace LoadMeasurementPanel.Worker.Services
 {
@@ -16,21 +17,41 @@ namespace LoadMeasurementPanel.Worker.Services
             _logger = logger;
         }
 
-        public async Task<IEnumerable<MeasurementPerDay>> ImportExcelFromFtpServer(FtpSettings settings)
+        public async Task<IEnumerable<DailyEnergy>> ImportExcelFromFtpServer(FtpSettings settings)
         {
             using var ftpClient = new FtpClient(settings.Host, settings.Username, settings.Password);
+            // Configurar o uso de TLS/SSL
+            ftpClient.Config.EncryptionMode = FtpEncryptionMode.Explicit; // Usa FTPS explícito
+            // Para ambientes de teste (remova em produção se possível)
+            ftpClient.Config.ValidateAnyCertificate = true;
+
+            var items = ftpClient.GetListing(settings.RemoteFileDirectory);
+            string remotePath = "";
+            string fileName = "";
+
+            foreach (var item in items)
+            {
+                fileName = item.Name;
+                remotePath = Path.Combine(settings.RemoteFileDirectory, fileName);
+            }
+
             try
             {
                 ftpClient.Connect();
 
                 string localFilePath = Path.Combine(Path.GetTempPath(), "downloaded_file.xlsx");
-                var downloadResult = ftpClient.DownloadFile(localFilePath, settings.RemoteFilePath);
+                var downloadResult = ftpClient.DownloadFile(localFilePath, remotePath);
 
                 if (downloadResult == FtpStatus.Success)
                 {
                     _logger.LogInformation("Arquivo baixado com sucesso.");
 
-                    //ProcessExcelFile(localFilePath);
+                    var result = ProcessExcelFile(localFilePath, fileName);
+
+                    if(result.Result!.Count() >= 0)
+                    {
+                        var oi = "";
+                    }
 
                     File.Delete(localFilePath);  // Deleta o arquivo local após o processamento
                 }
@@ -47,9 +68,10 @@ namespace LoadMeasurementPanel.Worker.Services
             throw new NotImplementedException();
         }
 
-        private Response ProcessExcelFile(string filePath)
+        private Response ProcessExcelFile(string filePath, string fileName)
         {
-            var measuresList = new List<MeasurementPerDay>();
+            DateTime measurementDate = FileUtils.GetDataFromFileName(fileName);
+            var measuresList = new List<DailyEnergy>();
 
             try
             {
@@ -58,22 +80,23 @@ namespace LoadMeasurementPanel.Worker.Services
 
                 foreach (var row in worksheet.RowsUsed())
                 {
+                    DailyEnergy measurementPerDay = new DailyEnergy();
                     // Processa as células conforme necessário
-                    var cellValue = row.Cell(1).GetValue<string>();
-                    _logger.LogInformation($"Valor da célula: {cellValue}");
-                }
-                foreach (var row in worksheet.RangeUsed().RowsUsed())
-                {
-                    MeasurementPerDay measurementPerDay = new MeasurementPerDay();
+                    var pointName = row.Cell(1).GetValue<string>();
+                    _logger.LogInformation($"Valor da célula: {pointName}");
 
-                    foreach (var cell in row.Cells())
+                    measurementPerDay.MeasurementPointName = pointName;
+
+                    for (int i = 2; i < 26; i++)
                     {
-
-                        Console.Write(cell.Value + "\t");
+                        measurementPerDay.Measurements.Add(row.Cell(i).GetValue<decimal>());
                     }
-                    Console.WriteLine();
-                }
 
+                    measurementPerDay.MeasurementDate = measurementDate;
+
+                    measuresList.Add(measurementPerDay);
+                }
+                
                 _logger.LogInformation("Processamento do arquivo Excel concluído.");
             }
             catch (Exception ex)
@@ -81,7 +104,7 @@ namespace LoadMeasurementPanel.Worker.Services
                 _logger.LogError($"Erro ao processar o arquivo Excel: {ex.Message}");
             }
 
-            return 
+            return new Response(measuresList, "Ok");
         }
     }
 }

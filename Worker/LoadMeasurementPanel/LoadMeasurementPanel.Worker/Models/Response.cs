@@ -2,9 +2,9 @@
 
 namespace LoadMeasurementPanel.Worker.Models
 {
-    public class Response
+    public class Response(List<DailyEnergy> result, string? message)
     {
-        public List<MeasurementPerDay> Result {  get; set; }
-        public string? Message { get; set; }
+        public List<DailyEnergy> Result { get; set; } = result;
+        public string? Message { get; set; } = message;
     }
 }
