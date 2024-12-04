@@ -6,5 +6,10 @@
         {
             return $"{data.Year}-{data.Month}-{data.Day}";
         }
+
+        public static string FormatarDataParaTela(DateTime data)
+        {
+            return $"{data.Day}/{data.Month}/{data.Year}";
+        }
     }
 }

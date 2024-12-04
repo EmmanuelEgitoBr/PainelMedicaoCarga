@@ -9,7 +9,7 @@ namespace LoadMeasurementPanel.Web.Extensions
         public static IServiceCollection AddApiConfiguration(this IServiceCollection services,
             IConfiguration configuration)
         {
-            /*
+            
             services.AddScoped<IApiService, ApiService>();
 
             services.Configure<ApiSettings>(configuration.GetSection("ApiSettings"));
@@ -20,7 +20,7 @@ namespace LoadMeasurementPanel.Web.Extensions
                 client.BaseAddress = new Uri(settings!.BaseUrl);
                 //client.DefaultRequestHeaders.Add("Authorization", $"Bearer {settings.ApiKey}");
             });
-            */
+            
             return services;
         }
     }

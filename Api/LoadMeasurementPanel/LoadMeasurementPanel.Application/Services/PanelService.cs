@@ -53,7 +53,9 @@ namespace LoadMeasurementPanel.Application.Services
                         .GetAsync(p => p.Name == pointName 
                         && p.ActivationDate >= searchDate && p.ActivationDate < nextDay);
 
-            return _mapper.Map<EnergyConsumptionPerDayDto>(measure);
+            var summary = await _consumptionPerDayRepository.GetAsync(c => c.MeasuringPointId == measure.Id);
+
+            return _mapper.Map<EnergyConsumptionPerDayDto>(summary);
         }
 
         public async Task<MeasuringPointDetailsDto> GetMeasurementPointByNumber(string pointName)

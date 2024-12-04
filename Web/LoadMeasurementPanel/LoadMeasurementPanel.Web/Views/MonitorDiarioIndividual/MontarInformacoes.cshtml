@@ -37,6 +37,19 @@
     <hr />
     @if (Model != null)
     {
-        
+        <div class="row">
+            <div class="col-lg-8"></div>
+            <div class="col-lg-4">
+                <div class="container">
+                    <h6>Resumo do dia @ViewBag.DataRegistro</h6>
+                    <hr />
+                    <div class="form-control" >
+                        <label style="font-size:small"><b>Consumo total:</b> @Html.DisplayFor(model => model.ConsumoTotal) Kwh</label>
+                        <label style="font-size:small"><b>Consumo médio:</b> @Html.DisplayFor(model => model.ConsumoMedio) Kwh</label>
+                        <label style="font-size:small"><b>Horas sem registro:</b> @Html.DisplayFor(model => model.HorasSemRegistro)</label>
+                    </div>
+                </div>
+            </div>
+        </div>
     }
 </div>

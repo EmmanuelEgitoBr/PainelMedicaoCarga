@@ -1,10 +1,18 @@
-﻿using LoadMeasurementPanel.Web.Utils;
+﻿using LoadMeasurementPanel.Web.Services.Interfaces;
+using LoadMeasurementPanel.Web.Utils;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LoadMeasurementPanel.Web.Controllers
 {
     public class MonitorDiarioIndividualController : Controller
     {
+        private readonly IApiService _apiService;
+
+        public MonitorDiarioIndividualController(IApiService apiService)
+        {
+            _apiService = apiService;
+        }
+
         public IActionResult Index()
         {
             return View();
@@ -17,10 +25,21 @@ namespace LoadMeasurementPanel.Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult MontarInformacoes(string nomeMedidor, DateTime dataRegistro) 
+        public async Task<IActionResult> MontarInformacoes(string nomeMedidor, DateTime dataRegistro) 
         {
-            string sData = Formatador.FormatarDataParaApi(dataRegistro);
-            var oi = "";
+            if (ModelState.IsValid)
+            {
+                string sData = Formatador.FormatarDataParaApi(dataRegistro);
+
+                var result = await _apiService.GetDailySummary(nomeMedidor, sData);
+
+                if (result == null) { return View(); }
+
+                ViewBag.DataRegistro = Formatador.FormatarDataParaTela(dataRegistro);
+
+                return View(result);
+            }
+
             return View();
         }
     }
