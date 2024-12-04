@@ -1,0 +1,42 @@
+﻿@{
+    ViewData["Title"] = "Informacao";
+}
+
+@model ResumoDiarioModel
+
+<div class="container">
+    <h4>Monitor diário de energia elétrica</h4>
+    <hr />
+    <h6>Informe o ponto de medição e a data da medição:</h6>
+    <br />
+    <form asp-action="MontarInformacoes" method="post">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-1">
+                    <label class="form-label" for="orderNumber">Medidor:</label>
+                </div>
+                <div class="col-md-3">
+                    <input class="form-control" type="text" id="nomeMedidor" name="nomeMedidor" asp-for="NomeMedidor" />
+                </div>
+                <div class="col-md-1">
+                    <label class="form-label" for="orderNumber">Data:</label>
+                </div>
+                <div class="col-md-3">
+                    <input class="form-control" type="date" id="dataRegistro" name="dataRegistro" asp-for="DataDaMedicao" />
+                </div>
+            </div>
+        </div>
+        <br />
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <button class=" btn btn-primary" type="submit">Consultar</button>
+                <a asp-controller="Home" asp-action="Index" class="btn btn-info">Voltar para início</a>
+            </div>
+        </div>
+    </form>
+    <hr />
+    @if (Model != null)
+    {
+        
+    }
+</div>
