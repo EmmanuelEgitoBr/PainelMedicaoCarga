@@ -4,6 +4,7 @@ namespace LoadMeasurementPanel.Application.Dtos
 {
     public class MeasuringPointDetailsDto
     {
+        public long Id { get; set; }
         [JsonPropertyName("nome")]
         public string Name { get; set; } = string.Empty;
 

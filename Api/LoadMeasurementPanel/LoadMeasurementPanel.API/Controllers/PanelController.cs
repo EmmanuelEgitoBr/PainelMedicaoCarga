@@ -15,6 +15,12 @@ namespace LoadMeasurementPanel.API.Controllers
             _panelService = panelService;
         }
 
+        [HttpGet("medidores")]
+        public async Task<List<MeasuringPointDto>> GetAllPoints()
+        {
+            return await _panelService.GetAllMeasurementPoints();
+        }
+
         [HttpGet("resumo-diario/{nomeMedidor}/{dataAmostra}")]
         public async Task<EnergyConsumptionPerDayDto> GetEnergyConsumptionPerDay(string nomeMedidor,
                                                                                  string dataAmostra)
@@ -24,6 +30,12 @@ namespace LoadMeasurementPanel.API.Controllers
             var result = await _panelService.GetMeasurementSummary(nomeMedidor, searchDate);
 
             return result;
+        }
+
+        [HttpGet("medidor/{id:long}")]
+        public async Task<MeasuringPointDetailsDto> GetMeasurementPointById(long id)
+        {
+            return await _panelService.GetMeasurementPointById(id);
         }
 
         [HttpGet("medidor/{nomeMedidor}")]

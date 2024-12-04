@@ -1,0 +1,64 @@
+﻿@{
+    ViewData["Title"] = "Medidores";
+}
+
+@model List<MedidorModel>
+
+<div class="container">
+    <h4>Gerenciamento de Medidores de Energia</h4>
+    <hr />
+    
+    <form class="form-control" method="get" asp-action="ListaMedidores">
+        <input class="form-control-sm" type="text" name="search" value="@ViewBag.Search" placeholder="Pesquisar..." />
+        <button class="btn btn-info" type="submit">Pesquisar</button>
+    </form>
+    <br />
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th style="text-align:center">ID</th>
+                <th style="text-align:center">Medidor</th>
+                <th style="text-align:center">Status</th>
+                <th style="text-align:center">Data criação/alteração</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var medidor in Model)
+            {
+                <tr>
+                    <td style="text-align:center">@medidor.Id</td>
+                    <td style="text-align:center">@medidor.Name</td>
+                    @{
+                        if (@medidor.IsActive)
+                        {
+                            <td style="text-align:center">Ativo</td>
+                        }
+                        else
+                        {
+                            <td style="text-align:center">Inativo</td>
+                        }
+                    }
+                    <td style="text-align:center">@medidor.ActivationDate.ToString("dd/MM/yyyy")</td>
+                    <td style="text-align:center">
+                        <a asp-action="DetalhesMedidor" asp-route-id="@medidor.Id" title="Detalhes" class="btn btn-primary">
+                            <span class="fa-search">&nbsp Detalhes</span>
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <!-- Paginação -->
+    <div>
+        <ul class="pagination">
+            @for (int i = 1; i <= ViewBag.TotalPages; i++)
+            {
+                <li class="page-item @(ViewBag.CurrentPage == i ? "active" : "")">
+                    <a class="page-link" href="?page=@i&search=@ViewBag.Search">@i</a>
+                </li>
+            }
+        </ul>
+    </div>
+</div>

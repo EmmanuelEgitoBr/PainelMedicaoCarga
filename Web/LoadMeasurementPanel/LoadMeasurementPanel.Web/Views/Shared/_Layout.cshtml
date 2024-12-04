@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/LoadMeasurementPanel.Web.styles.css" asp-append-version="true" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="~/font-awesome/css/all.css" />
 </head>
 <body>
     <header>
@@ -24,6 +26,12 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="MonitorDiarioIndividual" asp-action="MontarInformacoes">Monitor</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="PontoMedicao" asp-action="Index">Visão Geral dos Medidores</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="PontoMedicao" asp-action="ListaMedidores">Gerenciamento de Medidores</a>
                         </li>
                     </ul>
                 </div>

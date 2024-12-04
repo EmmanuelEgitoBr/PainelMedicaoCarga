@@ -1,0 +1,63 @@
+﻿@{
+    ViewData["Title"] = "Medidores";
+}
+
+@model List<GraficoDonutModel>
+
+<div class="container">
+    <h4>Visão Geral dos Medidores</h4>
+    <hr />
+    <h5>Situação dos medidores:</h5>
+    <br />
+    <label><b>TOTAL DE MEDIDORES:</b> @ViewBag.TotalMedidores</label>
+    <br />
+    <div class="row">
+        <div class="col-md-4" style="height:200px">
+            <canvas id="doughnutChart" width="100" height="100"></canvas>
+            <script>
+                // Dados recebidos do backend
+                const chartData = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model));
+
+                // Configuração do gráfico
+                const data = {
+                    labels: chartData.map(item => item.Label),
+                    datasets: [{
+                        data: chartData.map(item => item.Value),
+                        backgroundColor: chartData.map(item => item.Color),
+                        borderWidth: 1
+                    }]
+                };
+
+                const config = {
+                    type: 'doughnut',
+                    data: data,
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: {
+                                position: 'top',
+                            },
+                        }
+                    }
+                };
+
+                // Renderizar o gráfico
+                const ctx = document.getElementById('doughnutChart').getContext('2d');
+                new Chart(ctx, config);
+            </script>
+        </div>
+        <div class="col-md-4" style="height:200px">
+            <div class="container" style="border:solid;border-color:slategray;border-radius:5px;border-width:1px;text-align:center;padding-top:15px" >
+                <p><b style="color:green">Ativos:</b> @ViewBag.Ativos medidores</p>
+                <p><b style="color:red">Inativos:</b> @ViewBag.Inativos medidores</p>
+            </div>
+        </div>
+    </div>
+    <hr />
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <a asp-controller="PontoMedicao" asp-action="ListaMedidores" class="btn btn-info">Ver lista de medidores</a>
+        </div>
+    </div>
+    <br />
+</div>

@@ -37,6 +37,10 @@ namespace LoadMeasurementPanel.Web.Controllers
 
                 ViewBag.DataRegistro = Formatador.FormatarDataParaTela(dataRegistro);
 
+                var medidas = await _apiService.GetDailyMeasures(nomeMedidor, sData);
+
+                if (medidas != null) { result.Medidas = medidas.Measurements; }
+
                 return View(result);
             }
 

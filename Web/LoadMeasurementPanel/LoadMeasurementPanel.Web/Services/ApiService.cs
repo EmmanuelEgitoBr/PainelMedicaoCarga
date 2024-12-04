@@ -32,6 +32,41 @@ namespace LoadMeasurementPanel.Web.Services
             return result;
         }
 
+        public async Task<MedidasDiariaModel> GetDailyMeasures(string pointName, string searchDate)
+        {
+            var response = await _httpClient.GetAsync($"/api/excel/buscar-registro/{pointName}/{searchDate}");
+            response.EnsureSuccessStatusCode();
+            return await response.Content.ReadFromJsonAsync<MedidasDiariaModel>() ?? new MedidasDiariaModel();
+        }
+
+        public async Task<InfoMedidoresModel> GetPointsInformations()
+        {
+            var response = await _httpClient.GetAsync($"/api/painel/controle-pontos");
+            response.EnsureSuccessStatusCode();
+            return await response.Content.ReadFromJsonAsync<InfoMedidoresModel>() ?? new InfoMedidoresModel();
+        }
+
+        public async Task<DetalhesMedidorModel> GetMeasurePointDetailsById(long id)
+        {
+            var response = await _httpClient.GetAsync($"/api/painel/medidor/{id}");
+            response.EnsureSuccessStatusCode();
+            return await response.Content.ReadFromJsonAsync<DetalhesMedidorModel>() ?? new DetalhesMedidorModel();
+        }
+
+        public async Task<DetalhesMedidorModel> GetMeasurePointDetailsByName(string pointName)
+        {
+            var response = await _httpClient.GetAsync($"/api/painel/medidor/{pointName}");
+            response.EnsureSuccessStatusCode();
+            return await response.Content.ReadFromJsonAsync<DetalhesMedidorModel>() ?? new DetalhesMedidorModel();
+        }
+
+        public async Task<List<MedidorModel>> GetAllPoints()
+        {
+            var response = await _httpClient.GetAsync($"/api/painel/medidores");
+            response.EnsureSuccessStatusCode();
+            return await response.Content.ReadFromJsonAsync<List<MedidorModel>>() ?? new List<MedidorModel>();
+        }
+
         /*
         public async Task<CompleteOrderModel> CreateOrder(OrderModel order)
         {

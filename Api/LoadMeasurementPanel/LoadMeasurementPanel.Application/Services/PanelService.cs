@@ -45,6 +45,13 @@ namespace LoadMeasurementPanel.Application.Services
             _measuringPointRepository.Update(point);
         }
 
+        public async Task<List<MeasuringPointDto>> GetAllMeasurementPoints()
+        {
+            var point = await _measuringPointRepository.GetAllAsync();
+
+            return _mapper.Map<List<MeasuringPointDto>>(point);
+        }
+
         public async Task<EnergyConsumptionPerDayDto> GetMeasurementSummary(string pointName, DateTime searchDate)
         {
             var nextDay = searchDate.AddDays(1);
@@ -58,12 +65,26 @@ namespace LoadMeasurementPanel.Application.Services
             return _mapper.Map<EnergyConsumptionPerDayDto>(summary);
         }
 
+        public async Task<MeasuringPointDetailsDto> GetMeasurementPointById(long id)
+        {
+            var point = await _measuringPointRepository.GetAsync(p => p.Id == id);
+
+            return new MeasuringPointDetailsDto
+            {
+                Id = point.Id,
+                Name = point.Name,
+                IsActive = (point.IsActive) ? "Ativo" : "Inativo",
+                LastUpdate = point.ActivationDate
+            };
+        }
+
         public async Task<MeasuringPointDetailsDto> GetMeasurementPointByNumber(string pointName)
         {
             var point = await _measuringPointRepository.GetAsync(p => p.Name == pointName);
 
             return new MeasuringPointDetailsDto
             {
+                Id = point.Id,
                 Name = point.Name,
                 IsActive = (point.IsActive) ? "Ativo" : "Inativo",
                 LastUpdate = point.ActivationDate

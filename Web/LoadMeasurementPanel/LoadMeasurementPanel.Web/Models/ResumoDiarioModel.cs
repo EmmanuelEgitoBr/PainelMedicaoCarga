@@ -7,5 +7,6 @@
         public int HorasSemRegistro { get; set; }
         public string NomeMedidor { get; set; } = string.Empty;
         public DateTime DataDaMedicao { get; set; }
+        public List<decimal> Medidas { get; set; } = new List<decimal>();
     }
 }
