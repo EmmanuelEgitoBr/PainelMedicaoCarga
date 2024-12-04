@@ -2,7 +2,30 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
+    ViewData["Title"] = "Detalhes";
 }
+
+@model DetalhesMedidorModel
+
 <div class="container">
     <h5>Informações do Medidor de Energia</h5>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <b>Medidor: </b> @Model.Name
+        </div>
+        <div class="col-md-4">
+            <b>Status: </b> @Model.IsActive
+        </div>
+        <div class="col-md-4">
+            <b>Criação/Atualização: </b> @Model.LastUpdate.ToString("dd/MM/yyyy")
+        </div>
+    </div>
+    <hr/>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <a asp-controller="Home" asp-action="Index" class="btn btn-danger">Desativar Medidor</a>
+            <a asp-controller="PontoMedicao" asp-action="ListaMedidores" class="btn btn-info">Voltar para listagem</a>
+        </div>
+    </div>
 </div>

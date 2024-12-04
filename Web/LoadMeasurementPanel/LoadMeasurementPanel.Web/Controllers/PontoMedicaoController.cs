@@ -56,20 +56,15 @@ namespace LoadMeasurementPanel.Web.Controllers
         }
 
         [HttpGet()]
-        public async Task<IActionResult> DetalhesMedidor(int? id)
+        public async Task<IActionResult> DetalhesMedidor(long? id)
         {
             if (id == null) return NotFound();
-            /*
-            var productDto = await _productService.GetById(id);
 
-            if (productDto == null) return NotFound();
+            var medidor = await _apiService.GetMeasurePointDetailsById(id.Value);
 
-            var categories = await _categoryService.GetCategories();
-            ViewBag.CategoryId = new SelectList(categories, "Id", "Name", productDto.CategoryId);
+            if (medidor == null) return NotFound();
 
-            return View(productDto);
-            */
-            return View();
+            return View(medidor);
         }
 
         private async Task<List<GraficoDonutModel>> GerarGraficoDonut()
