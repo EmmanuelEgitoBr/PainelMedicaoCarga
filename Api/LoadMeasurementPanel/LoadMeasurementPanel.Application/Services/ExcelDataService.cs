@@ -27,5 +27,18 @@ namespace LoadMeasurementPanel.Application.Services
 
             await _excelDataRepository.CreateAsync(excelDataEntity);
         }
+
+        public async Task<ExcelDataDto> GetMeasurementDailyRegister(string pointName, DateTime searchDate)
+        {
+            var nextDay = searchDate.AddDays(1);
+
+            var registers = await _excelDataRepository
+                .FindAsync(r => r.DataRegistro >= searchDate && r.DataRegistro < nextDay);
+
+            var dailyRegisters = registers.Medicoes!
+                .Where(m => m.MeasurementPointName == pointName).FirstOrDefault();
+
+            return _mapper.Map<ExcelDataDto>(dailyRegisters);
+        }
     }
 }

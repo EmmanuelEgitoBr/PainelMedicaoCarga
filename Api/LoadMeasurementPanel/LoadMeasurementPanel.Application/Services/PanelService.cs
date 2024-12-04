@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using LoadMeasurementPanel.Application.Dtos;
 using LoadMeasurementPanel.Application.Interfaces;
 using LoadMeasurementPanel.Application.Utils;
 using LoadMeasurementPanel.Domain.Entities;
@@ -42,6 +43,48 @@ namespace LoadMeasurementPanel.Application.Services
             point.IsActive = false;
             point.ActivationDate = DateTime.Now;
             _measuringPointRepository.Update(point);
+        }
+
+        public async Task<EnergyConsumptionPerDayDto> GetMeasurementSummary(string pointName, DateTime searchDate)
+        {
+            var nextDay = searchDate.AddDays(1);
+
+            var measure = await _measuringPointRepository
+                        .GetAsync(p => p.Name == pointName 
+                        && p.ActivationDate >= searchDate && p.ActivationDate < nextDay);
+
+            return _mapper.Map<EnergyConsumptionPerDayDto>(measure);
+        }
+
+        public async Task<MeasuringPointDetailsDto> GetMeasurementPointByNumber(string pointName)
+        {
+            var point = await _measuringPointRepository.GetAsync(p => p.Name == pointName);
+
+            return new MeasuringPointDetailsDto
+            {
+                Name = point.Name,
+                IsActive = (point.IsActive) ? "Ativo" : "Inativo",
+                LastUpdate = point.ActivationDate
+            };
+        }
+
+        public async Task<MeasuringPointInfoDto> GetMeasurementPointsInfo()
+        {
+            var points = await _measuringPointRepository.GetAllAsync();
+            int total = points.Count();
+            int inactive = 0;
+
+            foreach (var point in points) 
+            {
+                if (!point.IsActive) { inactive++; }
+            }
+
+            return new MeasuringPointInfoDto
+            {
+                TotalNumber = total,
+                NumberActivePoints = total - inactive,
+                NumberInactivePoints = inactive
+            };
         }
 
         public async Task UpdateMeasuringPointsList()

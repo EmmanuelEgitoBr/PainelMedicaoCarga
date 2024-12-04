@@ -1,10 +1,10 @@
-﻿using LoadMeasurementPanel.Application.Interfaces;
-using Microsoft.AspNetCore.Http;
+﻿using LoadMeasurementPanel.Application.Dtos;
+using LoadMeasurementPanel.Application.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LoadMeasurementPanel.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/painel")]
     [ApiController]
     public class PanelController : ControllerBase
     {
@@ -15,14 +15,37 @@ namespace LoadMeasurementPanel.API.Controllers
             _panelService = panelService;
         }
 
+        [HttpGet("resumo-diario/{nomeMedidor}/{dataAmostra}")]
+        public async Task<EnergyConsumptionPerDayDto> GetEnergyConsumptionPerDay(string nomeMedidor,
+                                                                                 string dataAmostra)
+        {
+            var searchDate = Convert.ToDateTime(dataAmostra);
+            
+            var result = await _panelService.GetMeasurementSummary(nomeMedidor, searchDate);
+
+            return result;
+        }
+
+        [HttpGet("medidor/{nomeMedidor}")]
+        public async Task<MeasuringPointDetailsDto> GetMeasurementPointByNumber(string nomeMedidor)
+        {
+            return await _panelService.GetMeasurementPointByNumber(nomeMedidor);
+        }
+
+        [HttpGet("controle-pontos")]
+        public async Task<MeasuringPointInfoDto> GetMeasurementPointsInfo()
+        {
+            return await _panelService.GetMeasurementPointsInfo();
+        }
+
         [HttpPost("atualizar-medidores")]
         public async Task UpdateMeasuringPoints()
         {
             await _panelService.UpdateMeasuringPointsList();
         }
 
-        [HttpPut("desativar-medidor/{nome:alpha}")]
-        public async Task DisablemeasuringPoint(string nome)
+        [HttpPut("desativar-medidor/{nome}")]
+        public async Task DisableMeasuringPoint(string nome)
         {
             await _panelService.DeactivateMeasurementPoint(nome);
         }
