@@ -1,7 +1,4 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿@{
     ViewData["Title"] = "Detalhes";
 }
 
@@ -22,10 +19,42 @@
         </div>
     </div>
     <hr/>
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <a asp-controller="Home" asp-action="Index" class="btn btn-danger">Desativar Medidor</a>
-            <a asp-controller="PontoMedicao" asp-action="ListaMedidores" class="btn btn-info">Voltar para listagem</a>
+    <div class="row">
+        <div class="col-md-2">
+            <button type="button" class="btn btn-danger"
+                    data-bs-toggle="modal"
+                    data-bs-target="#confirmationModal"
+                    data-action-url="/Controller/Action/123">
+                Desativar Medidor
+            </button>
+        </div>
+        <div class="col-md-2">
+            <a asp-controller="PontoMedicao" asp-action="ListaMedidores" class="btn btn-info">Ir para listagem</a>
+        </div>
+        <div class="col-md-2">
+            <a asp-controller="Home" asp-action="Index" class="btn btn-info">Voltar para início</a>
         </div>
     </div>
 </div>
+<!--Modal de confirmar desativação-->
+<div class="modal fade" id="confirmationModal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalLabel">Confirmação</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Tem certeza de que deseja realizar esta ação?
+            </div>
+            <div class="modal-footer">
+                <form asp-action="DesativarMedidor">
+                    <input type="hidden" asp-for="Name" />
+                    <input type="submit" id="confirmButton" value="Desativar" class="btn btn-danger" /> |
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+

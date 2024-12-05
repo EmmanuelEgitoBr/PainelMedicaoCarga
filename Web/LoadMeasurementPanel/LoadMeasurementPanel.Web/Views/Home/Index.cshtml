@@ -1,8 +1,30 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Inicio";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="container">
+    <h6 class="display-6">Painel de Medição</h6>
+    <hr />
+    <h5>Escolha uma das opções abaixo</h5>
+    <br />
+    <div class="row" style="text-align:center">
+        <div class="col-lg-4">
+            <div>
+                <a asp-controller="MonitorDiarioIndividual" asp-action="MontarInformacoes"><img src="~/images/monitor_energia.png" style="width:40%" /></a>
+                <div style="padding-top:10px"><span style="color:#666666">Monitorar medidor</span></div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div>
+                <a asp-controller="PontoMedicao" asp-action="Index"><img src="~/images/medidor_energia.png" style="width:40%" /></a>
+                <div style="padding-top:10px"><span style="color:#666666">Visão geral</span></div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div>
+                <a asp-controller="PontoMedicao" asp-action="ListaMedidores"><img src="~/images/gerenciamento_energia.png" style="width:40%" /></a>
+                <div style="padding-top:10px"><span style="color:#666666">Gerenciamento de medidores</span></div>
+            </div>
+        </div>
+    </div>
 </div>

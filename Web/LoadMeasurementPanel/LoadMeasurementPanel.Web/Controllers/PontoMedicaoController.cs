@@ -67,6 +67,18 @@ namespace LoadMeasurementPanel.Web.Controllers
             return View(medidor);
         }
 
+        [HttpPost]
+        public async Task<IActionResult> DesativarMedidor(string name)
+        {
+            if (name == null) return NotFound();
+
+            var result = await _apiService.DisableMeasurementPointByName(name);
+
+            if(result) return RedirectToAction("ListaMedidores"); ;
+
+            return NotFound();
+        }
+
         private async Task<List<GraficoDonutModel>> GerarGraficoDonut()
         {
             var informations = await _apiService.GetPointsInformations();

@@ -56,8 +56,8 @@ namespace LoadMeasurementPanel.API.Controllers
             await _panelService.UpdateMeasuringPointsList();
         }
 
-        [HttpPut("desativar-medidor/{nome}")]
-        public async Task DisableMeasuringPoint(string nome)
+        [HttpPut("desativar-medidor")]
+        public async Task DisableMeasuringPoint([FromBody] string nome)
         {
             await _panelService.DeactivateMeasurementPoint(nome);
         }

@@ -10,5 +10,6 @@ namespace LoadMeasurementPanel.Web.Services.Interfaces
         Task<DetalhesMedidorModel> GetMeasurePointDetailsById(long id);
         Task<DetalhesMedidorModel> GetMeasurePointDetailsByName(string pointName);
         Task<List<MedidorModel>> GetAllPoints();
+        Task<bool> DisableMeasurementPointByName(string pointName);
     }
 }

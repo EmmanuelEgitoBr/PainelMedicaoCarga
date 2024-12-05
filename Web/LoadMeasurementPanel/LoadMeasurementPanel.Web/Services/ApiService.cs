@@ -67,27 +67,15 @@ namespace LoadMeasurementPanel.Web.Services
             return await response.Content.ReadFromJsonAsync<List<MedidorModel>>() ?? new List<MedidorModel>();
         }
 
-        /*
-        public async Task<CompleteOrderModel> CreateOrder(OrderModel order)
+        public async Task<bool> DisableMeasurementPointByName(string pointName)
         {
-            var json = JsonSerializer.Serialize(order);
+            var json = JsonSerializer.Serialize(pointName);
             var content = new StringContent(json, Encoding.UTF8, "application/json");
-            var response = await _httpClient.PostAsync($"/api/Pedido/registrar-pedido", content);
-            response.EnsureSuccessStatusCode();
-
-            return await response.Content.ReadFromJsonAsync<CompleteOrderModel>() ?? new CompleteOrderModel();
-        }
-
-        public async Task<bool> UpdateStatus(UpdateStatusModel model)
-        {
-            var json = JsonSerializer.Serialize(model);
-            var content = new StringContent(json, Encoding.UTF8, "application/json");
-            var response = await _httpClient.PutAsync($"/api/Pedido/alterar-status", content);
-
-            if (response.IsSuccessStatusCode) { return true; }
+            var response = await _httpClient.PutAsync($"/api/painel/desativar-medidor", content);
+            
+            if (response.IsSuccessStatusCode) return true;
 
             return false;
         }
-        */
     }
 }
